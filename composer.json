@@ -1,0 +1,19 @@
+{
+    "name": "admin/fiscal",
+    "description": "sistma de gestion",
+    "authors": [
+        {
+            "name": "Isai Santana",
+            "email": "lsc.visantana@gmail.com"
+        }
+    ],
+    "require": {
+        "php":">=7.0.0",
+        "illuminate/database": "5.4.19"
+    },
+    "autoload":{
+      "psr-4":{
+        "App\\":"app/"
+      }
+    }
+}
