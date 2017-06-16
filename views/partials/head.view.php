@@ -12,6 +12,7 @@
     <title><?=  'Log-in' ?> | Servicio Fiscal Contable</title>
   </head>
   <body>
+    <?php   if(isset($_SESSION['signed'])) :?>
     <nav class="navbar navbar-default">
       <div class="container">
         <div class="navbar-header">
@@ -35,3 +36,4 @@
     <div class="container text-right">
       <a href="<?= PUBLIC_PATH?>/out">Cerrar sesión</a>
     </div>
+  <?php endif?>

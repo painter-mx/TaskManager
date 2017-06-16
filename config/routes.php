@@ -8,7 +8,9 @@ define ('ROUTES',[
   'Tareas'=>['controller'=>'Page','action'=>'tasksIndex'],
   'Empleados'=>['controller'=>'Page','action'=>'employeesIndex'],
   'Imss'=>['controller'=>'Page','action'=>'imssIndex'],
-  'out'=>['controller'=>'Page','action'=>'out']
+  'out'=>['controller'=>'Page','action'=>'out'],
+  'addCustomer'=>['controller'=>'Page','action'=>'addCustomerIndex'],
+  'addCustomerAction'=>['controller'=>'Administrator','action'=>'addCustomerAction']
   /*,
   'nosotros' => ['controller' => 'Page','action' => 'about','pageselected' => 'Nosotros'],
   'productos' => ['controller' => 'Article', 'action' => 'index','pageselected' => 'Productos'],

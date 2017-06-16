@@ -127,90 +127,17 @@ class PageController
     }
   }
 
-  public function about()
+  public function addCustomerIndex()
   {
-    $page = "Nosotros";
-    View::render('pages/about',compact('page'));
-  }
-
-  public function contact()
-  {
-    $page = "Contacto";
-
-    if($_SERVER['REQUEST_METHOD'] == 'POST')
+    if(isset($_SESSION['signed']))
     {
-      $name = trim($_POST['name']);
-      $email= trim($_POST['email']);
-      $message = htmlentities(trim($_POST['message']));
-      $captchaInput= trim($_POST['captcha']);
-      $inputs = compact('name','email','message');
-
-      /**
-      *
-      * VALIDACION DE LOS CAMPOS
-      **/
-      if($name == '')
-      {
-        $this->contactWithError('El campo nombre es obligatorio',$inputs);
-      }elseif($email == ''){
-        $this->contactWithError('El campo Email es obligatorio',$inputs);
-      }elseif($message == ''){
-        $this->contactWithError('El campo Mensaje es obligatorio',$inputs);
-      }elseif ($captchaInput != $_SESSION['phrase']) {
-        $this->contactWithError('El texto no coincide con la imagen',$inputs);
-      }
-      /**
-      *
-      * ENVIO DE E-MAIL
-      *
-      **/
-      $mail = new Mail;
-      if(!$mail->validateAddress($email)){
-        $this->contactWithError('El email ingresado no es valido');
-      }
-
-      $mail->setFrom(LDL_MAIL['AddressFrom'], LDL_MAIL['NameFrom']);
-      $mail->addAddress(LDL_MAIL['AddressInbox'], LDL_MAIL['NameInbox']);
-      $mail->isHTML(true);
-      $mail->Subject = "Lampara de lava : {$name} <{$email}>";
-      $mail->Body    = nl2br($message);
-
-      if($mail->send())
-      {
-        View::render('pages/success');
-      }else {
-        $this->contactWithError('El mensaje no pudo ser enviado. Error : '.$mail->ErrorInfo,$inputs);
-      }
+      View::render('pages/addCustomer');
     }
-    else {
-
-      /**
-      *
-      * CREACION DEL CAPTCHA
-      **/
-      $captcha = new CaptchaBuilder;
-      $captcha->build();
-      $_SESSION['phrase'] = $captcha->getPhrase();
-      View::render('pages/contact',compact('captcha','page'));
-
+    else
+    {
+      View::render('pages/notfound');
     }
   }
-
-  private function contactWithError($errorMessage,array $variables = [])
-  {
-    /**
-    *
-    *CREACION DEL NUEVO CAPTCHA CUAND HAY ERRORES
-    */
-    $captcha = new CaptchaBuilder;
-    $captcha->build();
-    $_SESSION['phrase'] = $captcha->getPhrase();
-    $variables['captcha'] = $captcha;
-    $variables['errorMessage'] = $errorMessage;
-    View::render('pages/contact',$variables);
-    exit;
-  }
-
   public function notFound()
   {
     View::render('pages/notfound');

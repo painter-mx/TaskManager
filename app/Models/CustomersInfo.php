@@ -6,7 +6,6 @@ class CustomersInfo extends Model
 {
   protected $table ="CustomersInfo";
 
-  
 }
 
 ?>

@@ -1,5 +1,5 @@
+<?php include APP_PATH.'/views/partials/head.view.php';?>
 
-<?php include APP_PATH.'/views/partials/head.view.php'?>
     <div class="container">
         <div class="jumbotron text-center">
           <h1>Servicio Fiscal Contable</h1>
